@@ -5,25 +5,32 @@ This repository contains the baseline experiment for removing water artifacts fr
 ## 🎯 Project Goal
 The goal is to digitally remove water/saliva from dental scans to improve the visibility of tooth structures. The current approach uses the **pix2pix** architecture (paired image-to-image translation).
 
-## 📂 Dataset
-The dataset consists of paired images:
-- **Input (A):** Wet teeth (with water droplets/reflections).
-- **Target (B):** Dry teeth (air-dried references).
+## 📂 Dataset Details
+The data was sourced from the internal dataset `_public/Vident-Water`.
 
-### Structure & Split
-Total images: ~800 pairs.
-- **Training Set:** 700 pairs (Folder: `./wet` and `./dry`)
-- **Validation Set:** 100 pairs (Folder: `./val/wet` and `./val/dry`)
-- **Resolution:** Images were resized/cropped to 256x256 during training.
+### 1. Training Set
+- **Source Path:** `_public/Vident-Water/I/1pb_1/camera1`
+- **Input (Wet):** 680 images (Range: `frame_00650` to `frame_01329`)
+- **Target (Dry):** 1 reference image (`frame_00000`)
+- **Note:** The single dry reference image was paired with all 680 wet frames for training.
 
-## 🚀 Training (Baseline)
+### 2. Validation / Test Set
+- **Source Path:** `_public/Vident-Water/I/1pb_2/camera1/`
+- **Input (Wet):** 100 images (Range: `frame_00875` to `frame_00974`)
+- **Split:** These images were strictly excluded from the training process to evaluate generalization.
+
+### Preprocessing
+- Images were resized and cropped to 256x256 resolution during training to fit the standard pix2pix architecture.
+
+## 🚀 Training Configuration
 We trained a standard pix2pix model on an HPC cluster (A100 GPU).
 
-**Configuration:**
+**Hyperparameters:**
 - **Model:** pix2pix (U-Net 256 generator + PatchGAN discriminator)
-- **Epochs:** 100 (constant LR) + 100 (decay)
+- **Epochs:** 100 (constant LR) + 100 (linear decay)
 - **Batch Size:** 8
 - **Direction:** AtoB (Wet -> Dry)
+- **Optimizer:** Adam (lr=0.0002, beta1=0.5)
 
 **Run Command:**
 ```bash
