@@ -33,7 +33,6 @@ We trained a standard pix2pix model on an HPC cluster (A100 GPU).
 - **Optimizer:** Adam (lr=0.0002, beta1=0.5)
 
 **Run Command:**
-```bash
 python train.py \
   --dataroot . \
   --name teeth_full_run_v1 \
@@ -48,3 +47,15 @@ python train.py \
   --preprocess resize_and_crop \
   --save_epoch_freq 5 \
   --display_freq 100
+
+## 🧪 Validation Results
+To evaluate the model on the unseen validation set (100 images from 1pb_2):
+
+python test.py \
+  --dataroot ./val \
+  --name teeth_full_run_v1 \
+  --model pix2pix \
+  --dataset_mode teeth \
+  --direction AtoB \
+  --preprocess resize_and_crop \
+  --num_test 100
