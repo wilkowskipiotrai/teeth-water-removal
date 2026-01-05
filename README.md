@@ -59,3 +59,12 @@ python test.py \
   --direction AtoB \
   --preprocess resize_and_crop \
   --num_test 100
+
+
+## 📸 Visual Results
+Here is a sample comparison from the test set (`frame_009xx`):
+
+| **Input (Wet)** | **Model Output (AI)** | **Ground Truth (Dry)** |
+|:---:|:---:|:---:|
+| ![Input](sample_input.png) | ![Output](sample_output.png) | ![Target](sample_target.png) |
+| *Original image with water artifacts* | *Processed by pix2pix* | *Reference dry image* |
