@@ -44,3 +44,24 @@ test/data/legacy_serialized.pt
 
 #Ignore Wandb
 wandb/
+
+# Ignoruj dane treningowe
+wet/
+dry/
+datasets/
+
+# Ignoruj wyniki treningu i modele (są za duże)
+checkpoints/
+results/
+
+# Ignoruj pliki systemowe i tymczasowe
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Ignoruj środowisko wirtualne (jeśli jest w folderze)
+venv/
+env/
+.idea/
+.vscode/
