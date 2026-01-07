@@ -91,3 +91,6 @@ These charts explain *why* the training stopped improving. We observe a "victory
 | *Loss increases ↗*<br>The Generator fails to trick the Discriminator. | *Loss drops to 0 ↘*<br>Discriminator perfectly identifies real images. | *Loss drops to 0 ↘*<br>Discriminator perfectly catches fakes. |
 
 **Conclusion:** The collapse of `D_real` and `D_fake` to near-zero values proves that the Discriminator became too strong, preventing further learning. This confirms the need to switch to a non-adversarial architecture like **Restormer**.
+
+### Credits
+- Original Codebase: [pytorch-CycleGAN-and-pix2pix by Jun-Yan Zhu et al.](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
