@@ -60,11 +60,34 @@ python test.py \
   --preprocess resize_and_crop \
   --num_test 100
 
-
 ## 📸 Visual Results
-Here is a sample comparison from the test set (`frame_009xx`):
+Here is a sample comparison from the test set (`frame_00894`):
 
 | **Input (Wet)** | **Model Output (AI)** | **Ground Truth (Dry)** |
 |:---:|:---:|:---:|
-| ![Input](sample_input.png) | ![Output](sample_output.png) | ![Target](sample_target.png) |
+| ![Input](assets/sample_input.png) | ![Output](assets/sample_output.png) | ![Target](assets/sample_target.png) |
 | *Original image with water artifacts* | *Processed by pix2pix* | *Reference dry image* |
+
+### 📈 Training Analysis & Metrics
+
+We monitored 4 key metrics to evaluate the model's performance and stability.
+
+### 1. Visual Fidelity (Primary Metric)
+**Metric:** `G_L1` (Reconstruction Loss)
+This graph represents the visual difference between the AI output and the real dry teeth.
+* **Interpretation:** The curve flattened around epoch 50 (value ~3.5), indicating the model reached its maximum potential for removing water artifacts.
+
+![Reconstruction Loss](assets/G_L1.png.png)
+
+---
+
+### 2. Adversarial Dynamics (Technical Analysis)
+These charts explain *why* the training stopped improving. We observe a "victory" of the Discriminator over the Generator.
+
+| **Generator Struggle** | **Discriminator (Real Images)** | **Discriminator (Fake Images)** |
+| :---: | :---: | :---: |
+| **`G_GAN`** | **`D_real`** | **`D_fake`** |
+| ![G_GAN](assets/G_GAN.png.png) | ![D_real](assets/D_real.png.png) | ![D_fake](assets/D_fake.png.png) |
+| *Loss increases $\nearrow$*<br>The Generator fails to trick the Discriminator. | *Loss drops to 0 $\searrow$*<br>Discriminator perfectly identifies real images. | *Loss drops to 0 $\searrow$*<br>Discriminator perfectly catches fakes. |
+
+**Conclusion:** The collapse of `D_real` and `D_fake` to near-zero values proves that the Discriminator became too strong, preventing further learning. This confirms the need to switch to a non-adversarial architecture like **Restormer**.
