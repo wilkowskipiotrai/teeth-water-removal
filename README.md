@@ -77,7 +77,7 @@ We monitored 4 key metrics to evaluate the model's performance and stability.
 This graph represents the visual difference between the AI output and the real dry teeth.
 * **Interpretation:** The curve flattened around epoch 50 (value ~3.5), indicating the model reached its maximum potential for removing water artifacts.
 
-![Reconstruction Loss](assets/G_L1.png.png)
+![Reconstruction Loss](assets/G_L1.png)
 
 ---
 
