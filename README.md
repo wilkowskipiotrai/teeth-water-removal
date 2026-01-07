@@ -87,7 +87,7 @@ These charts explain *why* the training stopped improving. We observe a "victory
 | **Generator Struggle** | **Discriminator (Real Images)** | **Discriminator (Fake Images)** |
 | :---: | :---: | :---: |
 | **`G_GAN`** | **`D_real`** | **`D_fake`** |
-| ![G_GAN](assets/G_GAN.png.png) | ![D_real](assets/D_real.png.png) | ![D_fake](assets/D_fake.png.png) |
+| ![G_GAN](assets/G_GAN.png) | ![D_real](assets/D_real.png) | ![D_fake](assets/D_fake.png) |
 | *Loss increases $\nearrow$*<br>The Generator fails to trick the Discriminator. | *Loss drops to 0 $\searrow$*<br>Discriminator perfectly identifies real images. | *Loss drops to 0 $\searrow$*<br>Discriminator perfectly catches fakes. |
 
 **Conclusion:** The collapse of `D_real` and `D_fake` to near-zero values proves that the Discriminator became too strong, preventing further learning. This confirms the need to switch to a non-adversarial architecture like **Restormer**.
